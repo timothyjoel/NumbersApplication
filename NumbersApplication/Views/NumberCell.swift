@@ -30,12 +30,12 @@ class NumberCell: UITableViewCell {
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         backgroundColor = selected ? .red : .none
-        textLabel?.textColor = selected ? .white : .black
+        nameLabel.textColor = selected ? .white : .black
     }
     
     override func setHighlighted(_ highlighted: Bool, animated: Bool) {
         backgroundColor = highlighted ? .blue : .none
-        textLabel?.textColor = highlighted ? .white : .black
+        nameLabel.textColor = highlighted ? .white : .black
     }
     
     private func setupIndicator() {
