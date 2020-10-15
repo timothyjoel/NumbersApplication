@@ -6,8 +6,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
-            self.window = UIWindow(windowScene: windowScene)
-            self.window!.backgroundColor = .white
+        self.window = UIWindow(windowScene: windowScene)
+        self.window!.backgroundColor = .white
+        if UIDevice.current.userInterfaceIdiom == .pad {
             let splitViewController =  UISplitViewController(style: .doubleColumn)
             let mainViewController = MasterTableViewController()
             let detailsViewController = DetailsTableViewController()
@@ -23,6 +24,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             mainViewController.fetchNumbers()
             self.window!.rootViewController = splitViewController
             self.window!.makeKeyAndVisible()
+        } else {
+            let mainViewController = MasterTableViewController()
+            mainViewController.fetchNumbers()
+            let navigationController = UINavigationController(rootViewController: mainViewController)
+            self.window!.rootViewController = navigationController
+            self.window!.makeKeyAndVisible()
+        }
+    
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

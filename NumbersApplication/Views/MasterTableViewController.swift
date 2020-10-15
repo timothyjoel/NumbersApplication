@@ -34,7 +34,14 @@ class MasterTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        delegate?.didSelect(number: numbers[indexPath.row])
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            delegate?.didSelect(number: numbers[indexPath.row])
+        } else {
+            let vc = DetailsTableViewController()
+            vc.number = numbers[indexPath.row]
+            navigationController?.pushViewController(vc, animated: true)
+        }
+        
     }
     
     func fetchNumbers() {
@@ -43,7 +50,6 @@ class MasterTableViewController: UITableViewController {
             guard let numbers =  numbers else { return }
             self?.numbers = numbers
             self?.delegate?.didSelect(number: numbers[0])
-            self?.tableView.delegate?.tableView?(self!.tableView, didSelectRowAt: IndexPath(row: 0, section: 0))
         }
     }
     
