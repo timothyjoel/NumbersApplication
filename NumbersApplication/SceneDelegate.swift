@@ -6,25 +6,22 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
-//        if UIDevice.current.userInterfaceIdiom == .pad {
-//            self.window = UIWindow(windowScene: windowScene)
-//            self.window!.backgroundColor = .white
-//            let splitViewController =  UISplitViewController()
-//            let mainViewController = MainTableViewController()
-//            let detailsViewController = DetailsTableViewController(number: nil)
-//            detailsViewController.view.backgroundColor = .red
-//            splitViewController.viewControllers = [mainViewController, detailsViewController]
-//            splitViewController.preferredPrimaryColumnWidthFraction = 0.5
-//            splitViewController.preferredDisplayMode = .oneOverSecondary
-//            self.window!.rootViewController = splitViewController
-//            self.window!.makeKeyAndVisible()
-//        } else {
-            let mainViewController = MainTableViewController()
-            window = UIWindow(windowScene: windowScene)
-            window?.rootViewController = UINavigationController(rootViewController: mainViewController)
-            window?.makeKeyAndVisible()
-//        }
-          
+            self.window = UIWindow(windowScene: windowScene)
+            self.window!.backgroundColor = .white
+            let splitViewController =  UISplitViewController(style: .doubleColumn)
+            let mainViewController = MasterTableViewController()
+            let detailsViewController = DetailsTableViewController()
+            mainViewController.delegate = detailsViewController
+            let navMain = UINavigationController(rootViewController: mainViewController)
+            let navDetails = UINavigationController(rootViewController: detailsViewController)
+            splitViewController.preferredSplitBehavior = .tile
+            splitViewController.viewControllers = [navMain, navDetails]
+            splitViewController.preferredDisplayMode = .automatic
+            splitViewController.maximumPrimaryColumnWidth = splitViewController.view.bounds.width
+            splitViewController.preferredPrimaryColumnWidthFraction = 0.5
+            splitViewController.primaryEdge = .leading
+            self.window!.rootViewController = splitViewController
+            self.window!.makeKeyAndVisible()
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
