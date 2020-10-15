@@ -20,6 +20,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             splitViewController.maximumPrimaryColumnWidth = splitViewController.view.bounds.width
             splitViewController.preferredPrimaryColumnWidthFraction = 0.5
             splitViewController.primaryEdge = .leading
+            mainViewController.fetchNumbers()
             self.window!.rootViewController = splitViewController
             self.window!.makeKeyAndVisible()
     }

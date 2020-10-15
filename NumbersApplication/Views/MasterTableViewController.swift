@@ -21,7 +21,6 @@ class MasterTableViewController: UITableViewController {
         navigationController?.navigationBar.prefersLargeTitles = true
         view.backgroundColor = .white
         setupTableView()
-        fetchNumbers()
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -38,7 +37,7 @@ class MasterTableViewController: UITableViewController {
         delegate?.didSelect(number: numbers[indexPath.row])
     }
     
-    private func fetchNumbers() {
+    func fetchNumbers() {
         NetworkManager.shared.fetch(Numbers.self, url: .numbers) { [weak self] numbers, error in
             guard error == nil else { return }
             guard let numbers =  numbers else { return }
