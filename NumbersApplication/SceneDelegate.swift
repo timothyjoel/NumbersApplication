@@ -1,22 +1,30 @@
-//
-//  SceneDelegate.swift
-//  NumbersApplication
-//
-//  Created by Tymoteusz Stokarski on 15/10/2020.
-//
-
 import UIKit
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
 
-
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-        // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
-        // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
-        // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
-        guard let _ = (scene as? UIWindowScene) else { return }
+        guard let windowScene = (scene as? UIWindowScene) else { return }
+//        if UIDevice.current.userInterfaceIdiom == .pad {
+//            self.window = UIWindow(windowScene: windowScene)
+//            self.window!.backgroundColor = .white
+//            let splitViewController =  UISplitViewController()
+//            let mainViewController = MainTableViewController()
+//            let detailsViewController = DetailsTableViewController(number: nil)
+//            detailsViewController.view.backgroundColor = .red
+//            splitViewController.viewControllers = [mainViewController, detailsViewController]
+//            splitViewController.preferredPrimaryColumnWidthFraction = 0.5
+//            splitViewController.preferredDisplayMode = .oneOverSecondary
+//            self.window!.rootViewController = splitViewController
+//            self.window!.makeKeyAndVisible()
+//        } else {
+            let mainViewController = MainTableViewController()
+            window = UIWindow(windowScene: windowScene)
+            window?.rootViewController = UINavigationController(rootViewController: mainViewController)
+            window?.makeKeyAndVisible()
+//        }
+          
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
