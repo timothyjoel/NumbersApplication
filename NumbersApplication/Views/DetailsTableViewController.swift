@@ -31,9 +31,9 @@ class DetailsTableViewController: UITableViewController  {
     
 }
 
-extension DetailsTableViewController: MasterTableViewControllerDelegate  {
+extension DetailsTableViewController: NumberSelectionDelegate  {
     
-    func didSelect(number: Number) {
+    func numberSelected(_ number: Number) {
         self.number = number
     }
     

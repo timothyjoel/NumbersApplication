@@ -1,5 +1,10 @@
+import os.log
 import UIKit
 import SDWebImage
+
+protocol NumberSelectionDelegate: class {
+  func numberSelected(_ number: Number)
+}
 
 protocol MasterTableViewControllerDelegate {
     func didSelect(number: Number)
@@ -7,7 +12,7 @@ protocol MasterTableViewControllerDelegate {
 
 class MasterTableViewController: UITableViewController {
     
-    var delegate: MasterTableViewControllerDelegate?
+    weak var delegate: NumberSelectionDelegate?
     
     var numbers: [Number] = [] {
         didSet {
@@ -34,22 +39,20 @@ class MasterTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if UIDevice.current.userInterfaceIdiom == .pad {
-            delegate?.didSelect(number: numbers[indexPath.row])
-        } else {
-            let vc = DetailsTableViewController()
-            vc.number = numbers[indexPath.row]
-            navigationController?.pushViewController(vc, animated: true)
+        delegate?.numberSelected(numbers[indexPath.row])
+        if let detailViewController = delegate as? DetailsTableViewController {
+            if let detailNavigationController = detailViewController.navigationController {
+                splitViewController?.showDetailViewController(detailNavigationController, sender: nil)
+            }
         }
-        
     }
     
-    func fetchNumbers() {
+    func fetchNumbers(completion: @escaping () -> ()) {
         NetworkManager.shared.fetch(Numbers.self, url: .numbers) { [weak self] numbers, error in
             guard error == nil else { return }
             guard let numbers =  numbers else { return }
             self?.numbers = numbers
-            self?.delegate?.didSelect(number: numbers[0])
+            completion()
         }
     }
     
@@ -59,4 +62,3 @@ class MasterTableViewController: UITableViewController {
         tableView.allowsMultipleSelection = false
     }
 }
-
