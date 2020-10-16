@@ -15,6 +15,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let navMain = UINavigationController(rootViewController: masterViewController)
         let navDetails = UINavigationController(rootViewController: detailsViewController)
         splitViewController.viewControllers = [navMain, navDetails]
+        splitViewController.preferredDisplayMode = .automatic
         splitViewController.maximumPrimaryColumnWidth = splitViewController.view.bounds.width
         splitViewController.preferredPrimaryColumnWidthFraction = 0.5
         detailsViewController.navigationItem.leftItemsSupplementBackButton = true
