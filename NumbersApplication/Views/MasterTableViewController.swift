@@ -67,3 +67,9 @@ class MasterTableViewController: UITableViewController {
         tableView.allowsMultipleSelection = false
     }
 }
+
+extension MasterTableViewController: UISplitViewControllerDelegate {
+    func splitViewController(_ splitViewController: UISplitViewController, collapseSecondary secondaryViewController: UIViewController, onto primaryViewController: UIViewController) -> Bool {
+        true
+    }
+}

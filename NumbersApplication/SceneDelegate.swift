@@ -13,6 +13,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         masterViewController.delegate = detailsViewController
         let navMain = UINavigationController(rootViewController: masterViewController)
         let navDetails = UINavigationController(rootViewController: detailsViewController)
+        splitViewController.delegate = masterViewController
         splitViewController.viewControllers = [navMain, navDetails]
         splitViewController.preferredDisplayMode = .oneBesideSecondary
         splitViewController.maximumPrimaryColumnWidth = splitViewController.view.bounds.width
