@@ -26,6 +26,11 @@ class MasterTableViewController: UITableViewController {
         navigationController?.navigationBar.prefersLargeTitles = true
         view.backgroundColor = .white
         setupTableView()
+        fetchNumbers { [weak self] in
+            guard let number = self?.numbers.first else { return }
+            self?.delegate?.numberSelected(number)
+            print("hell")
+        }
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

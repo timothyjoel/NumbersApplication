@@ -11,11 +11,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let masterViewController = MasterTableViewController()
         let detailsViewController = DetailsTableViewController()
         masterViewController.delegate = detailsViewController
-        masterViewController.fetchNumbers { detailsViewController.number = masterViewController.numbers.first }
         let navMain = UINavigationController(rootViewController: masterViewController)
         let navDetails = UINavigationController(rootViewController: detailsViewController)
         splitViewController.viewControllers = [navMain, navDetails]
-        splitViewController.preferredDisplayMode = .automatic
+        splitViewController.preferredDisplayMode = .oneBesideSecondary
         splitViewController.maximumPrimaryColumnWidth = splitViewController.view.bounds.width
         splitViewController.preferredPrimaryColumnWidthFraction = 0.5
         detailsViewController.navigationItem.leftItemsSupplementBackButton = true
