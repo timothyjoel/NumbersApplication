@@ -6,10 +6,6 @@ protocol NumberSelectionDelegate: class {
   func numberSelected(_ number: Number)
 }
 
-protocol MasterTableViewControllerDelegate {
-    func didSelect(number: Number)
-}
-
 class MasterTableViewController: UITableViewController {
     
     weak var delegate: NumberSelectionDelegate?
@@ -69,6 +65,7 @@ class MasterTableViewController: UITableViewController {
 }
 
 extension MasterTableViewController: UISplitViewControllerDelegate {
+    
     func splitViewController(_ splitViewController: UISplitViewController, collapseSecondary secondaryViewController: UIViewController, onto primaryViewController: UIViewController) -> Bool {
         true
     }
