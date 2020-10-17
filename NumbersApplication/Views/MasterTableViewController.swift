@@ -18,21 +18,22 @@ class MasterTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = .white
         title = "Numbers"
         navigationController?.navigationBar.prefersLargeTitles = true
-        view.backgroundColor = .white
-        setupTableView()
+        tableView.register(NumberCell.self)
+        tableView.tableFooterView = UIView()
+        tableView.allowsMultipleSelection = false
         fetchNumbers { [weak self] in
             guard let number = self?.numbers.first else { return }
             self?.delegate?.numberSelected(number)
-            print("hell")
         }
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeue(NumberCell.self, for: indexPath)
         cell.number = numbers[indexPath.row]
-        return  cell
+        return cell
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -57,11 +58,6 @@ class MasterTableViewController: UITableViewController {
         }
     }
     
-    private func setupTableView() {
-        tableView.register(NumberCell.self)
-        tableView.tableFooterView = UIView()
-        tableView.allowsMultipleSelection = false
-    }
 }
 
 extension MasterTableViewController: UISplitViewControllerDelegate {
